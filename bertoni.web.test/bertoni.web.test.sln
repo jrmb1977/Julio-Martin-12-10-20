@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bertoni.web.test", "bertoni.web.test\bertoni.web.test.csproj", "{692F4D3F-91CC-45F9-A717-C248FC988F00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{692F4D3F-91CC-45F9-A717-C248FC988F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{692F4D3F-91CC-45F9-A717-C248FC988F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{692F4D3F-91CC-45F9-A717-C248FC988F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{692F4D3F-91CC-45F9-A717-C248FC988F00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51C1F8B3-3343-4FE6-835E-D867F13254C9}
+	EndGlobalSection
+EndGlobal

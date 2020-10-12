@@ -1,0 +1,106 @@
+﻿@using bertoni.web.test.Models;
+@model IEnumerable<bertoni.web.test.Models.Photo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Album> ListaAlbums = new List<Album>();
+
+    RespuestaAlbums respuestaGetAlbums = JsonBase.GetAlbums();
+    bool GetAlbumsOK = respuestaGetAlbums.Codigo == "0";
+    if (GetAlbumsOK)
+    { ListaAlbums = respuestaGetAlbums.Data; }
+
+    List<itemLista> lst = new List<itemLista>();
+    foreach (Album itemAlbum in ListaAlbums)
+    {
+        var item = new itemLista { texto = String.Format("{0:000} {1}", itemAlbum.id, itemAlbum.title), url = Url.Action("Index", "Foto", new { album = itemAlbum.id }) };
+        lst.Add(item);
+    }
+
+    SelectList lstAlbums = new SelectList(lst, "url", "texto");
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+    $(function () {
+        $('#urlddl').change(function () {
+            var url = $(this).val();
+            if (url != null && url != '') {
+                window.location.href = url;
+            }
+        });
+    });
+
+    $(function () {
+        $("#btnComments").click(function () {
+            var selectedItem = 1;//$(this).val();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.Action("SomeAction", "SomeController"))",
+                    data: { "countryId": selectedItem},
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function(id, option) {
+                            ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        });
+
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert('No pude terminar esta parte :-(.');
+
+                    }
+                });
+            });
+        });
+</script>       
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.DropDownList("cboAlbums", lstAlbums, "Seleccione un Álbum...", new { id = "urlddl", @class = "form-control" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.albumId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thumbnailUrl)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.albumId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thumbnailUrl)
+            </td>
+            <td>
+                <input type="button" id="btnComments" value="Ver Comentarios" />
+            </td>
+        </tr>
+    }
+
+</table>
